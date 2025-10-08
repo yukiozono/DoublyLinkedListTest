@@ -10,7 +10,7 @@ struct scoreData {
 
 /**
  * @class doublyLinkedList
- * @brief 指定したファイルを取り込める双方向リスト
+ * @brief 指定されたデータを取り込み、出力可能なリスト
  */
 class doublyLinkedList {
 private:
