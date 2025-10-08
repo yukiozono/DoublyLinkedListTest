@@ -22,11 +22,10 @@ private:
 		Node* prevNode = nullptr;    //一つ前のノードのポインタ
 		Node* nextNode = nullptr;    //一つ後のノードのポインタ
 		scoreData data = {};
-		bool isDummy = false;        //ダミーノードであるか
 	};
 	size_t listSize = 0;   //現在のリストのサイズ
-
-	Node* dummy = nullptr;  //ダミーノード
+	Node  dummyNode;       //ダミーノード
+	Node* dummy = nullptr;  //ダミーノードアドレス
 
 	/**
      * @brief  引数のノードが存在するかを探索する
@@ -49,14 +48,10 @@ public:
 	/**
 	 * @brief コンストラクタ
 	 */
-	doublyLinkedList() {
-		//ダミーノード作成
-		dummy = new Node();
-		dummy->isDummy = true; //ダミーノードであると判別
+	doublyLinkedList() : dummyNode{}, dummy(&dummyNode) {
 
 		//循環リストにする
-		dummy->nextNode = dummy;
-		dummy->prevNode = dummy;
+		dummy->nextNode = dummy->prevNode = dummy;
 	}
 
 	/**
@@ -64,7 +59,6 @@ public:
 	 */
 	~doublyLinkedList() {
 		clear();
-		delete dummy;
 		dummy = nullptr;
 	}
 
@@ -94,14 +88,14 @@ public:
 		 */
 		constIterator& operator--() { 
 			//もしend()などから末尾(ダミーノード)を指定してデクリメントした場合、
-			if (node->isDummy) {
+			if (node == host->dummy) {
 				//もしダミーのprevNodeが自身を指していた場合、リストは空なので、assert発生
 				assert(node->prevNode != node);
 			}
 			//実際に中身があるノードだった場合
 			else {
 				//prevNodeがダミーだった場合、先頭を通り越しているので、assert発生
-				assert(!node->prevNode->isDummy);
+				assert(node->prevNode != host->dummy);
 			}
 			node = node->prevNode;
 			return *this;;
@@ -119,7 +113,7 @@ public:
 		 */
 		constIterator& operator++() {
 			//nullptrではない場合と、ダミーノードではない場合のみ通す
-			assert(node != nullptr && !node->isDummy);
+			assert(node != nullptr && node != host->dummy);
 			node = node->nextNode; 
 			return *this; 
 		}
@@ -136,12 +130,12 @@ public:
 		 */
 		const scoreData& operator*() const { 
 			//nullptrではない場合と、ダミーノードではない場合のみ通す
-			assert(node != nullptr && !node->isDummy);
+			assert(node != nullptr && node != host->dummy);
 			return node->data; 
 		}
 
 		/**
-		 * @brief   コピーコンストラクタ自動生成(iteratorの位置ポインタを上書き)(代入を行う[operator=]())
+		 * @brief   コピー代入演算子(iteratorの位置ポインタを上書き)(代入を行う[operator=]())
 		 * @param   source 代入元
 		 * @return  *this
 		 */
@@ -181,7 +175,7 @@ public:
 		scoreData& operator*() {
 
 			//nullptrではない場合と、ダミーノードではない場合のみ通す
-			assert(node != nullptr && !node->isDummy);
+			assert(node != nullptr && node != host->dummy);
 			return node->data; 
 		}
 
@@ -192,14 +186,14 @@ public:
 		 */
 		iterator& operator--() {
 			//もしend()などから末尾(ダミーノード)を指定してデクリメントした場合、
-			if (node->isDummy) {
+			if (node == host->dummy) {
 				//もしダミーのprevNodeが自身を指していた場合、リストは空なので、assert発生
 				assert(node->prevNode != node);
 			}
 			//実際に中身があるノードだった場合
 			else {
 				//prevNodeがダミーだった場合、先頭を通り越しているので、assert発生
-				assert(!node->prevNode->isDummy);
+				assert(node->prevNode != host->dummy);
 			}
 			node = node->prevNode; 
 			return *this; 
@@ -218,7 +212,7 @@ public:
 		 */
 		iterator& operator++() {
 			//nullptrではない場合と、ダミーノードではない場合のみ通す
-			assert(node != nullptr && !node->isDummy);
+			assert(node != nullptr && node != host->dummy);
 			node = node->nextNode; 
 			return *this; 
 		}
@@ -315,7 +309,6 @@ public:
 
 		//データを代入し、ダミーではないと判別する
 		current->data = datas;
-		current->isDummy = false;
 
 
 		//リストサイズを管理する変数を+1
@@ -353,10 +346,10 @@ public:
 	 */
 	void clear() {
 		Node* current = dummy->nextNode;
-		//currentがdummyになるまでループし、ノードを削除
+		//currentがdummyになるまでループし、deleteNodeでノードを削除
 		while (current != dummy) {
 			Node* next = current->nextNode;
-			delete current;
+			deleteNode(iterator(current,this));
 			current = next;
 		}
 		dummy->nextNode = dummy;
@@ -381,16 +374,8 @@ public:
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const iterator& nodePos, const scoreData& data) {
-		//イテレータの所有者が自分でない場合、falseを返す
-		if (nodePos.host != this) {
-			return false;
-		}
-
-		if (nodePos.node != nullptr && !containsNode(nodePos.node)) {
-			return false;
-		}
-		addNode(constIterator(nodePos.node,this), data);
-		return true;
+		//nodePosに対してstatic_castを行い、constIteratorのinsertDataを使用
+		return insertData(static_cast<const constIterator&>(nodePos), data);
 	}
 
 	/**
@@ -418,13 +403,8 @@ public:
 	 * @return 成功であればtrue、そして空、host不一致、nodePos==endもしくは不正であればfalseを返す
 	 */
 	bool deleteData(const iterator& nodePos) {
-		if (listSize == 0)               return false;
-		if (nodePos.node == nullptr)     return false;
-		if (nodePos.host != this)        return false;
-		if (nodePos.node == dummy)       return false;
-		if (!containsNode(nodePos.node)) return false;
-		deleteNode(nodePos);
-		return true;
+		//nodePosに対してstatic_castを行い、constIteratorのdeleteDataを使用
+		return deleteData(static_cast<const constIterator&> (nodePos));
 	}
 
 	/**
@@ -439,6 +419,8 @@ public:
 		if (nodePos.node == dummy)       return false;
 		if (!containsNode(nodePos.node)) return false;
 
-		return deleteData(iterator(nodePos.node, this));
+		deleteNode(iterator(nodePos.node,this));
+
+		return true;
 	}
 };

@@ -1160,28 +1160,36 @@ TEST(doublyLinkedListTest, ID1_9_ifUsingPreIncrement) {
         //iterator側でテスト
         doublyLinkedList::iterator it = list.begin();
         doublyLinkedList::iterator headIt = list.begin();
-        
+        doublyLinkedList::iterator checkIt;
+
         //中身を確認
         EXPECT_EQ(2, (*headIt).score);
 
         //要素を一つ進め、中身を確認
-        ++it;
+        checkIt = ++it;
         EXPECT_EQ(1, (*it).score);
         EXPECT_EQ(2, (*headIt).score);
+
+        //戻り値が正しいか確認
+        EXPECT_EQ(checkIt, it);
     }
 
     {
         //constIterator側でテスト
         doublyLinkedList::constIterator constIt = list.cbegin();
         doublyLinkedList::constIterator constHeadIt = list.cbegin();
+        doublyLinkedList::constIterator constCheckIt;
 
         //中身を確認
         EXPECT_EQ(2, (*constHeadIt).score);
 
         //要素を一つ進め、中身を確認
-        ++constIt;
+        constCheckIt = ++constIt;
         EXPECT_EQ(1, (*constIt).score);
         EXPECT_EQ(2, (*constHeadIt).score);
+
+        //戻り値が正しいか確認
+        EXPECT_EQ(constCheckIt, constIt);
     }
 }
 
@@ -1198,28 +1206,36 @@ TEST(doublyLinkedListTest, ID1_9_ifUsingPostIncrement) {
         //iterator側でテスト
         doublyLinkedList::iterator it = list.begin();
         doublyLinkedList::iterator headIt = list.begin();
+        doublyLinkedList::iterator checkIt;
 
         //中身を確認
         EXPECT_EQ(2, (*headIt).score);
 
         //要素を一つ進め、中身を確認
-        it++;
+        checkIt = it++;
         EXPECT_EQ(1, (*it).score);
         EXPECT_EQ(2, (*headIt).score);
+
+        //戻り値が正しいか確認(操作前の先頭アドレスと同値であるはず)
+        EXPECT_EQ(checkIt, headIt);
     }
 
     {
         //constIterator側でテスト
         doublyLinkedList::constIterator constIt = list.cbegin();
         doublyLinkedList::constIterator constHeadIt = list.cbegin();
+        doublyLinkedList::constIterator constCheckIt;
 
         //中身を確認
         EXPECT_EQ(2, (*constHeadIt).score);
 
         //要素を一つ進め、中身を確認
-        constIt++;
+        constCheckIt = constIt++;
         EXPECT_EQ(1, (*constIt).score);
         EXPECT_EQ(2, (*constHeadIt).score);
+
+        //戻り値が正しいか確認(操作前の先頭アドレスと同値であるはず)
+        EXPECT_EQ(constCheckIt, constHeadIt);
     }
 }
 
@@ -1352,32 +1368,52 @@ TEST(doublyLinkedListTest, ID1_15_ifUsingPreDecrement) {
         //iterator側でテスト
         doublyLinkedList::iterator it = list.end();
         doublyLinkedList::iterator endIt = list.end();
+        doublyLinkedList::iterator checkIt;
 
         //中身を確認
         --endIt;
-        --it;
+         checkIt = --it;
         EXPECT_EQ(1, (*endIt).score);
 
+        //戻り値が正しいか確認(先頭から一つ進んだアドレスと同値であるはず)
+        endIt = list.begin();
+        ++endIt;
+        EXPECT_EQ(checkIt, endIt);
+
         //要素を一つ進め、中身を確認
-        --it;
+        checkIt = --it;
         EXPECT_EQ(2, (*it).score);
         EXPECT_EQ(1, (*endIt).score);
+
+        //戻り値が正しいか確認(先頭と同値であるはず)
+        it = list.begin();
+        EXPECT_EQ(checkIt, it);
     }
 
     {
         //constIterator側でテスト
         doublyLinkedList::constIterator constIt = list.cend();
         doublyLinkedList::constIterator constEndIt = list.cend();
+        doublyLinkedList::constIterator constCheckIt;
 
         //中身を確認
         --constIt;
-        --constEndIt;
+        constCheckIt = --constEndIt;
         EXPECT_EQ(1, (*constEndIt).score);
 
+        //戻り値が正しいか確認(先頭から一つ進んだアドレスと同値であるはず)
+        constEndIt = list.begin();
+        ++constEndIt;
+        EXPECT_EQ(constCheckIt, constEndIt);
+
         //要素を一つ進め、中身を確認
-        --constIt;
+        constCheckIt = --constIt;
         EXPECT_EQ(2, (*constIt).score);
         EXPECT_EQ(1, (*constEndIt).score);
+
+        //戻り値が正しいか確認(先頭と同値であるはず)
+        constIt = list.begin();
+        EXPECT_EQ(constCheckIt, constIt);
     }
 }
 
@@ -1393,32 +1429,50 @@ TEST(doublyLinkedListTest, ID1_16_ifUsingPostDecrement) {
         //iterator側でテスト
         doublyLinkedList::iterator it = list.end();
         doublyLinkedList::iterator endIt = list.end();
+        doublyLinkedList::iterator checkIt;
 
         //中身を確認
         endIt--;
-        it--;
+        checkIt = it--;
         EXPECT_EQ(1, (*endIt).score);
 
+        //戻り値が正しいか確認(末尾と同値であるはず)
+        EXPECT_EQ(checkIt, list.end());
+
         //要素を一つ進め、中身を確認
-        it--;
+        checkIt = it--;
         EXPECT_EQ(2, (*it).score);
         EXPECT_EQ(1, (*endIt).score);
+
+        //戻り値が正しいか確認(先頭から一つ進んだアドレスと同値であるはず)
+        endIt = list.begin();
+        ++endIt;
+        EXPECT_EQ(checkIt, endIt);
     }
 
     {
         //constIterator側でテスト
         doublyLinkedList::constIterator constIt = list.cend();
         doublyLinkedList::constIterator constEndIt = list.cend();
+        doublyLinkedList::constIterator constCheckIt;
 
         //中身を確認
-        constIt--;
+        constCheckIt = constIt--;
         constEndIt--;
         EXPECT_EQ(1, (*constEndIt).score);
 
+        //戻り値が正しいか確認(末尾と同値であるはず)
+        EXPECT_EQ(constCheckIt, list.end());
+
         //要素を一つ進め、中身を確認
-        constIt--;
+        constCheckIt = constIt--;
         EXPECT_EQ(2, (*constIt).score);
         EXPECT_EQ(1, (*constEndIt).score);
+
+        //戻り値が正しいか確認(先頭から一つ進んだアドレスと同値であるはず)
+        constEndIt = list.begin();
+        ++constEndIt;
+        EXPECT_EQ(constCheckIt, constEndIt);
     }
 }
 
