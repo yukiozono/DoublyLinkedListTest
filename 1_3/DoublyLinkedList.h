@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <fstream>
-#include <cassert>
 
 struct scoreData {
 	int            score = 0;
@@ -12,6 +11,7 @@ struct scoreData {
  * @class doublyLinkedList
  * @brief 指定されたデータを取り込み、出力可能なリスト
  */
+template <class T>
 class doublyLinkedList {
 private:
 	struct Node {
@@ -28,35 +28,19 @@ private:
      * @param  node 対象のポインタ
 	 * @return 存在する場合はtrue、無い場合はfalseを返す
      */
-	bool containsNode(const Node* node) const {
-		if (node == dummy) return true;  //指定ノードがダミーノードである場合、一応存在しているので、trueを返す
-
-		for (Node* current = dummy->nextNode; current != dummy; current = current->nextNode) {
-			if (current == node) {
-				return true;
-			}
-		}
-		return false;
-	}
+	bool containsNode(const Node* node) const;
 	
 
 public:
 	/**
 	 * @brief コンストラクタ
 	 */
-	doublyLinkedList() : dummyNode{}, dummy(&dummyNode) {
-
-		//循環リストにする
-		dummy->nextNode = dummy->prevNode = dummy;
-	}
+	doublyLinkedList();
 
 	/**
 	 * @brief デストラクタでリストの内容物全消去
 	 */
-	~doublyLinkedList() {
-		clear();
-		dummy = nullptr;
-	}
+	~doublyLinkedList();
 
 
 	class constIterator {
@@ -70,7 +54,7 @@ public:
 		const doublyLinkedList* host = nullptr;
 
 		//コンストラクタ(initの値で初期化)
-		explicit constIterator(Node* init, const doublyLinkedList* hostInit) : node(init), host(hostInit) {}
+		//explicit constIterator(Node* init, const doublyLinkedList::* hostInit);
 
 	public:
 	    /**
@@ -420,3 +404,6 @@ public:
 		return true;
 	}
 };
+
+//.inlをインクルード
+#include "DoublyLinkedList.inl"
