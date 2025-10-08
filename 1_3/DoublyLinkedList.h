@@ -10,11 +10,7 @@ struct scoreData {
 
 /**
  * @class doublyLinkedList
- * @brief 指定したファイルを取り込める双方向リスト
- *
- * @note 入力と出力はstd::stringのみ
- * txtファイルを指定し、読み込むことで、
- * 再度同順に出力できます
+ * @brief 指定されたデータを取り込み、出力可能なリスト
  */
 class doublyLinkedList {
 private:
