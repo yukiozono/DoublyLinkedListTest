@@ -13,7 +13,7 @@ int main(void) {
 		return 0;
 	}
 
-	doublyLinkedList list;
+	doublyLinkedList<scoreData> list;
 	std::string line = {};
 
 	//一行ずつListに追加
@@ -47,7 +47,7 @@ int main(void) {
 
 	
 	//リストの内容を出力
-	for (doublyLinkedList::iterator it = list.begin(); it != list.end(); ++it) {
+	for (doublyLinkedList<scoreData>::iterator it = list.begin(); it != list.end(); ++it) {
 		std::cout << (*it).score << '\t' << (*it).userName << std::endl;
 	}
 
