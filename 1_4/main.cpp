@@ -47,8 +47,8 @@ int main(void) {
 
 	
 	//リストの内容を出力
-	for (doublyLinkedList<scoreData>::iterator it = list.begin(); it != list.end(); ++it) {
-		std::cout << (*it).score << '\t' << (*it).userName << std::endl;
+	for (auto& it : list) {
+		std::cout << it.score << '\t' << it.userName << std::endl;
 	}
 
 	return 0;

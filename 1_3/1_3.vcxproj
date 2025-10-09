@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="ScoreData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DoublyLinkedList.inl" />

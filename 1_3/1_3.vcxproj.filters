@@ -23,6 +23,9 @@
     <ClInclude Include="DoublyLinkedList.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreData.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DoublyLinkedList.inl">

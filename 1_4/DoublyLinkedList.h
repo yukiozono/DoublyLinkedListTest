@@ -29,6 +29,8 @@ private:
      */
 	bool containsNode(const Node* node) const;
 
+	
+
 public:
 	/**
 	 * @brief コンストラクタ
@@ -247,6 +249,15 @@ public:
 	 * @return 成功であればtrue、失敗の場合はfalseを返す
 	 */
 	bool deleteData(const constIterator& nodePos);
+
+	/**
+	 * @brief  リストをクイックソートでソートする
+	 * @param  element  ソートキー
+	 * @param  isAscend 昇順であるかどうか
+	 * @return 成功であればtrue、失敗の場合はfalseを返す
+	 * @note   参考URL:(https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/similar_programming/quick_sort/)(https://algs4.cs.princeton.edu/23quicksort/)
+	 */
+	void sortList(const int sortKey, const bool isAscend);
 };
 
 //.inlをインクルード
