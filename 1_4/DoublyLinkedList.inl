@@ -313,3 +313,15 @@ bool doublyLinkedList<T>::deleteData(const constIterator& nodePos) {
 
 	return true;
 }
+
+//クイックソート
+template <class T>
+void doublyLinkedList<T>::sortList(const int sortKey,  const bool isAscend) {
+	//もしリストサイズが1もしくはそれ以下だった場合、中断
+	if (this->size() <= 1) return;
+
+	//分割判断基準を先頭に指定
+	const T element = *this->begin();
+
+
+}

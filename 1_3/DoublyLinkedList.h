@@ -2,11 +2,6 @@
 #include <string>
 #include <cassert>
 
-struct scoreData {
-	int            score = 0;
-	std::string    userName = {};
-};
-
 /**
  * @class doublyLinkedList
  * @brief 指定されたデータを取り込み、出力可能なリスト
@@ -24,7 +19,7 @@ private:
 
 	/**
      * @brief  引数のノードが存在するかを探索する
-     * @param  node 対象のポインタ
+     * @tparam  node 対象のポインタ
 	 * @return 存在する場合はtrue、無い場合はfalseを返す
      */
 	bool containsNode(const Node* node) const;
@@ -84,28 +79,28 @@ public:
 		constIterator  operator++(int);
 
 		/**
-		 * @brief  間接参照(戻り値 const scoreData&)（イテレータの指す要素を取得する[operator* const版]())
-		 * @return const scoreData&
+		 * @brief  間接参照(戻り値 const T&)（イテレータの指す要素を取得する[operator* const版]())
+		 * @return const T&
 		 */
 		const T& operator*()const;
 
 		/**
 		 * @brief   コピー代入演算子(iteratorの位置ポインタを上書き)(代入を行う[operator=]())
-		 * @param   source 代入元
+		 * @tparam   source 代入元
 		 * @return  *this
 		 */
 		constIterator& operator=(const constIterator& source);
 		
 		/**
 		 * @brief   等値比較(==であればtrueを返す)(値と所有者が同一か比較する[operator==]())
-		 * @param   comp 比較相手
+		 * @tparam   comp 比較相手
 		 * @return  等しい場合、true
 		 */
 		bool operator==(const constIterator& comp) const;
 
 		/**
 		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
-		 * @param   comp 比較相手
+		 * @tparam   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
 		bool operator!=(const constIterator& comp) const;
@@ -131,7 +126,7 @@ public:
 
 		/**
 		 * @brief  後置デクリメント用(it--)(リストの先頭に向かって一つ進める[operator--]())
-		 * @param  dummy(int)
+		 * @tparam  dummy(int)
 		 * @return 前に戻る以前のiterator
 		 */
 		iterator  operator--(int);
@@ -144,27 +139,27 @@ public:
 
 		/**
 		 * @brief  後置インクリメント用(it++)(リストの末尾に向かって一つ進める[operator++]())
-		 * @param  dummy(int)
+		 * @tparam  dummy(int)
 		 * @return 次に進む以前のiterator
 		 */
 		iterator  operator++(int);
 
 		/**
-		 * @brief  間接参照(戻り値 scoreData&)（イテレータの指す要素を取得する[operator*]())
-		 * @return scoreData&
+		 * @brief  間接参照(戻り値 T&)（イテレータの指す要素を取得する[operator*]())
+		 * @return T&
 		 */
 		T& operator*();
 
 		/**
 		 * @brief   等値比較(==であればtrueを返す)(同一か比較する[operator==]())
-		 * @param   comp 比較相手
+		 * @tparam   comp 比較相手
 		 * @return  等しい場合、true
 		 */
 		bool operator==(const iterator& comp) const;
 
 		/**
 		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
-		 * @param   comp 比較相手
+		 * @tparam   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
 		bool operator!=(const iterator& comp) const;
@@ -220,30 +215,30 @@ public:
 
 	/**
 	 * @brief  位置nodePosの直前に挿入(iterator)
-	 * @param  nodePos ノード位置
-	 * @param  data    入力データ
+	 * @tparam  nodePos ノード位置
+	 * @tparam  data    入力データ
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const iterator& nodePos, const T& data);
 
 	/**
 	 * @brief  位置nodePosの直前に挿入(constIterator)
-	 * @param  nodePos ノード位置
-	 * @param   data   入力データ
+	 * @tparam  nodePos ノード位置
+	 * @tparam   data   入力データ
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const constIterator& nodePos, const T& datas);
 
 	/**
 	 * @brief  位置nodePosにある要素を削除(iterator)
-	 * @param  nodePos ノード位置
+	 * @tparam  nodePos ノード位置
 	 * @return 成功であればtrue、そして空、host不一致、nodePos==endもしくは不正であればfalseを返す
 	 */
 	bool deleteData(const iterator& nodePos);
 
 	/**
 	 * @brief  位置nodePosにある要素を削除(constIterator)
-	 * @param  nodePos ノード位置
+	 * @tparam  nodePos ノード位置
 	 * @return 成功であればtrue、失敗の場合はfalseを返す
 	 */
 	bool deleteData(const constIterator& nodePos);
