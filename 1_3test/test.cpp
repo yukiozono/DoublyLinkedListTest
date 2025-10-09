@@ -935,11 +935,11 @@ TEST(doublyLinkedListTest, ID0_46_checkIfConst) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_0_whileNoListReference_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
  
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //スコアを代入(リストが空であるため、assert発生)
         (*it).score = 10;
@@ -947,7 +947,7 @@ TEST(doublyLinkedListTest, ID1_0_whileNoListReference_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //スコア読み取り(リストが空であるため、assert発生)
         int score = (*constIt).score;
     }
@@ -974,9 +974,9 @@ TEST(doublyLinkedListTest, ID1_1_ifPossibleToAssignValueFromIterator) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_2_ifPossibleToAssignValueFromConstIterator) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     list.insertData(list.cbegin(), scoreData{ 1,"A" });
-    doublyLinkedList::constIterator it = list.cbegin();
+    doublyLinkedList<scoreData>::constIterator it = list.cbegin();
 
     //スコアを代入(代入不可なのでコンパイルエラー)
     (*it).score = 10;
@@ -989,11 +989,11 @@ TEST(doublyLinkedListTest, ID1_2_ifPossibleToAssignValueFromConstIterator) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_3_ifListEmptyCallBeginIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.begin();
+        doublyLinkedList<scoreData>::iterator it = list.begin();
 
         //スコアを代入(リストが空なのでassert発生)
         (*it).score = 10;
@@ -1001,7 +1001,7 @@ TEST(doublyLinkedListTest, ID1_3_ifListEmptyCallBeginIterator_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cbegin();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cbegin();
         //スコア読み取り(リストが空なのでassert発生)
         int score = (*constIt).score;
     }
@@ -1013,12 +1013,12 @@ TEST(doublyLinkedListTest, ID1_3_ifListEmptyCallBeginIterator_callAssert) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_4_callFromEndIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     list.insertData(list.begin(), scoreData{ 1,"A" });
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //スコアを代入(末尾は空なのでassert発生)
         (*it).score = 10;
@@ -1026,7 +1026,7 @@ TEST(doublyLinkedListTest, ID1_4_callFromEndIterator_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //スコア読み取り(ダミーノードなのでassert発生)
         int score = (*constIt).score;
     }
@@ -1038,11 +1038,11 @@ TEST(doublyLinkedListTest, ID1_4_callFromEndIterator_callAssert) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_5_whileNoListReference_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //要素を一つ進める(ダミーノードであるため、assert発生)
         ++it;
@@ -1050,7 +1050,7 @@ TEST(doublyLinkedListTest, ID1_5_whileNoListReference_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //スコア読み取り(ダミーノードであるため、assert発生)
         int score = (*constIt).score;
     }
@@ -1062,11 +1062,11 @@ TEST(doublyLinkedListTest, ID1_5_whileNoListReference_callAssert) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_6_ifListEmptyIncrementFromBeginIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.begin();
+        doublyLinkedList<scoreData>::iterator it = list.begin();
 
         //要素を一つ進める(ダミーノードであるため、assert発生)
         ++it;
@@ -1074,7 +1074,7 @@ TEST(doublyLinkedListTest, ID1_6_ifListEmptyIncrementFromBeginIterator_callAsser
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cbegin();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cbegin();
         //要素を一つ進める(ダミーノードなのでassert発生)
         ++constIt;
     }
@@ -1086,12 +1086,12 @@ TEST(doublyLinkedListTest, ID1_6_ifListEmptyIncrementFromBeginIterator_callAsser
 */
 /*
 TEST(doublyLinkedListTest, ID1_7_usingIncremetFromEndIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     list.insertData(list.begin(), scoreData{ 1,"A" });
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //要素を一つ進める(末尾は空なのでassert発生)
         ++it;
@@ -1099,7 +1099,7 @@ TEST(doublyLinkedListTest, ID1_7_usingIncremetFromEndIterator_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //要素を一つ進める(末尾は空なのでassert発生)
         ++constIt;
     }
@@ -1244,11 +1244,11 @@ TEST(doublyLinkedListTest, ID1_9_ifUsingPostIncrement) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_11_whileNoListReference_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //要素を一つ進める(ダミーノードであるため、assert発生)
         --it;
@@ -1256,7 +1256,7 @@ TEST(doublyLinkedListTest, ID1_11_whileNoListReference_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //要素を一つ進める(ダミーノードであるため、assert発生)
         --constIt;
     }
@@ -1268,11 +1268,11 @@ TEST(doublyLinkedListTest, ID1_11_whileNoListReference_callAssert) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_12_ifListEmptyDecrementFromEndIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.end();
+        doublyLinkedList<scoreData>::iterator it = list.end();
 
         //要素を一つ進める(ダミーノードであるため、assert発生)
         --it;
@@ -1280,7 +1280,7 @@ TEST(doublyLinkedListTest, ID1_12_ifListEmptyDecrementFromEndIterator_callAssert
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cend();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cend();
         //要素を一つ進める(ダミーノードであるため、assert発生)
         --constIt;
     }
@@ -1292,12 +1292,12 @@ TEST(doublyLinkedListTest, ID1_12_ifListEmptyDecrementFromEndIterator_callAssert
 */
 /*
 TEST(doublyLinkedListTest, ID1_13_usingDecremetFromBeginIterator_callAssert) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
     list.insertData(list.begin(), scoreData{ 1,"A" });
 
     {
         //iterator側でテスト
-        doublyLinkedList::iterator it = list.begin();
+        doublyLinkedList<scoreData>::iterator it = list.begin();
 
         //要素を一つ進める(末尾は空なのでassert発生)
         --it;
@@ -1305,7 +1305,7 @@ TEST(doublyLinkedListTest, ID1_13_usingDecremetFromBeginIterator_callAssert) {
 
     {
         //constIterator側でテスト
-        doublyLinkedList::constIterator constIt = list.cbegin();
+        doublyLinkedList<scoreData>::constIterator constIt = list.cbegin();
         //要素を一つ進める(末尾は空なのでassert発生)
         --constIt;
     }
@@ -1481,10 +1481,10 @@ TEST(doublyLinkedListTest, ID1_16_ifUsingPostDecrement) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_17_checkNotPossibleToCreateCopyOfIteratorFromConst) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
 
     //コピーを作成できない為、コンパイルエラー
-    doublyLinkedList::iterator it = list.cbegin();
+    doublyLinkedList<scoreData>::iterator it = list.cbegin();
  
 }
 */
@@ -1506,10 +1506,10 @@ TEST(doublyLinkedListTest, ID1_18_checkIfAfterCopyHasSameValue) {
 */
 /*
 TEST(doublyLinkedListTest, ID1_20_checkNotPossibleAssignConstIntoIterator) {
-    doublyLinkedList list;
+    doublyLinkedList<scoreData> list;
 
-    doublyLinkedList::iterator      it      = list.begin();
-    doublyLinkedList::constIterator constIt = list.cbegin();
+    doublyLinkedList<scoreData>::iterator      it      = list.begin();
+    doublyLinkedList<scoreData>::constIterator constIt = list.cbegin();
 
     //代入できない為、コンパイルエラー
     it = constIt;
