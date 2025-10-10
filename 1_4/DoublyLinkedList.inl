@@ -3,10 +3,10 @@
 //====================================================================
 // private
 //====================================================================
-//ˆø”‚Ìƒm[ƒh‚ª‘¶İ‚·‚é‚©‚ğ’Tõ‚·‚é
+//å¼•æ•°ã®ãƒãƒ¼ãƒ‰ãŒå­˜åœ¨ã™ã‚‹ã‹ã‚’æ¢ç´¢ã™ã‚‹
 template <class T>
 bool doublyLinkedList<T>::containsNode(const Node* node) const {
-	if (node == &dummy) return true;  //w’èƒm[ƒh‚ªƒ_ƒ~[ƒm[ƒh‚Å‚ ‚éê‡Aˆê‰‘¶İ‚µ‚Ä‚¢‚é‚Ì‚ÅAtrue‚ğ•Ô‚·
+	if (node == &dummy) return true;  //æŒ‡å®šãƒãƒ¼ãƒ‰ãŒãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰ã§ã‚ã‚‹å ´åˆã€ä¸€å¿œå­˜åœ¨ã—ã¦ã„ã‚‹ã®ã§ã€trueã‚’è¿”ã™
 
 	for (Node* current = dummy.nextNode; current != &dummy; current = current->nextNode) {
 		if (current == node) {
@@ -19,14 +19,14 @@ bool doublyLinkedList<T>::containsNode(const Node* node) const {
 //====================================================================
 // public
 //====================================================================
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 template <class T>
 doublyLinkedList<T>::doublyLinkedList() : dummy{} {
-	//zŠÂƒŠƒXƒg‚É‚·‚é
+	//å¾ªç’°ãƒªã‚¹ãƒˆã«ã™ã‚‹
 	dummy.nextNode = dummy.prevNode = &dummy;
 }
 
-//ƒfƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 template <class T>
 doublyLinkedList<T>::~doublyLinkedList() {
 	clear();
@@ -36,34 +36,34 @@ doublyLinkedList<T>::~doublyLinkedList() {
 //====================================================================
 // constIterator
 //====================================================================
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^(init‚Ì’l‚Å‰Šú‰»)
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(initã®å€¤ã§åˆæœŸåŒ–)
 template <class T>
 doublyLinkedList<T>::constIterator::constIterator(
 	Node* init, const doublyLinkedList* hostInit)
 	: node(init), host(hostInit) {}
 
-//ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 template <class T>
 doublyLinkedList<T>::constIterator::constIterator() = default;
 
-//‘O’uƒfƒNƒŠƒƒ“ƒg—p(--it)
+//å‰ç½®ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(--it)
 template <class T>
 typename doublyLinkedList<T>::constIterator& doublyLinkedList<T>::constIterator::operator--() {
-	//‚à‚µend()‚È‚Ç‚©‚ç––”ö(ƒ_ƒ~[ƒm[ƒh)‚ğw’è‚µ‚ÄƒfƒNƒŠƒƒ“ƒg‚µ‚½ê‡A
+	//ã‚‚ã—end()ãªã©ã‹ã‚‰æœ«å°¾(ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰)ã‚’æŒ‡å®šã—ã¦ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã—ãŸå ´åˆã€
 	if (this->node == &this->host->dummy) {
-		//‚à‚µƒ_ƒ~[‚ÌprevNode‚ª©g‚ğw‚µ‚Ä‚¢‚½ê‡AƒŠƒXƒg‚Í‹ó‚È‚Ì‚ÅAassert”­¶
+		//ã‚‚ã—ãƒ€ãƒŸãƒ¼ã®prevNodeãŒè‡ªèº«ã‚’æŒ‡ã—ã¦ã„ãŸå ´åˆã€ãƒªã‚¹ãƒˆã¯ç©ºãªã®ã§ã€assertç™ºç”Ÿ
 		assert(this->node->prevNode != this->node);
 	}
-	//ÀÛ‚É’†g‚ª‚ ‚éƒm[ƒh‚¾‚Á‚½ê‡
+	//å®Ÿéš›ã«ä¸­èº«ãŒã‚ã‚‹ãƒãƒ¼ãƒ‰ã ã£ãŸå ´åˆ
 	else {
-		//prevNode‚ªƒ_ƒ~[‚¾‚Á‚½ê‡Aæ“ª‚ğ’Ê‚è‰z‚µ‚Ä‚¢‚é‚Ì‚ÅAassert”­¶
+		//prevNodeãŒãƒ€ãƒŸãƒ¼ã ã£ãŸå ´åˆã€å…ˆé ­ã‚’é€šã‚Šè¶Šã—ã¦ã„ã‚‹ã®ã§ã€assertç™ºç”Ÿ
 		assert(this->node->prevNode != &this->host->dummy);
 	}
 	this->node = this->node->prevNode;
 	return *this;
 }
 
-//Œã’uƒfƒNƒŠƒƒ“ƒg—p(it--)
+//å¾Œç½®ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(it--)
 template <class T>
 typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::constIterator::operator--(int) {
 	constIterator it = *this; 
@@ -71,16 +71,16 @@ typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::constIterator::
 	return it;
 }
 
-//‘O’uƒCƒ“ƒNƒŠƒƒ“ƒg—p(++it)
+//å‰ç½®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(++it)
 template <class T>
 typename doublyLinkedList<T>::constIterator& doublyLinkedList<T>::constIterator::operator++() {
-	//nullptr‚Å‚Í‚È‚¢ê‡‚ÆAƒ_ƒ~[ƒm[ƒh‚Å‚Í‚È‚¢ê‡‚Ì‚İ’Ê‚·
+	//nullptrã§ã¯ãªã„å ´åˆã¨ã€ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰ã§ã¯ãªã„å ´åˆã®ã¿é€šã™
 	assert(this->node != nullptr && this->node != &this->host->dummy);
 	this->node = this->node->nextNode;
 	return *this;
 }
 
-//Œã’uƒCƒ“ƒNƒŠƒƒ“ƒg—p(it++)
+//å¾Œç½®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(it++)
 template <class T>
 typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::constIterator::operator++(int) {
 	constIterator it = *this;
@@ -88,26 +88,26 @@ typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::constIterator::
 	return it;
 }
 
-//ŠÔÚQÆ
+//é–“æ¥å‚ç…§
 template <class T>
 const T&
 doublyLinkedList<T>::constIterator::operator*() const {
-	//nullptr‚Å‚Í‚È‚¢ê‡‚ÆAƒ_ƒ~[ƒm[ƒh‚Å‚Í‚È‚¢ê‡‚Ì‚İ’Ê‚·
+	//nullptrã§ã¯ãªã„å ´åˆã¨ã€ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰ã§ã¯ãªã„å ´åˆã®ã¿é€šã™
 	assert(this->node != nullptr && this->node != &this->host->dummy);
 	return this->node->data;
 }
 
-//‘ã“ü
+//ä»£å…¥
 template <class T>
 typename doublyLinkedList<T>::constIterator& doublyLinkedList<T>::constIterator::operator=(const constIterator& source) = default;
 
-//“™’l”äŠr
+//ç­‰å€¤æ¯”è¼ƒ
 template <class T>
 bool doublyLinkedList<T>::constIterator::operator==(const constIterator& comp) const {
 	return this->host == comp.host && this->node == comp.node;
 }
 
-//”ñ“™’l”äŠr
+//éç­‰å€¤æ¯”è¼ƒ
 template <class T>
 bool doublyLinkedList<T>::constIterator::operator!=(const constIterator& comp)const {
 	return !(*this == comp);
@@ -116,34 +116,34 @@ bool doublyLinkedList<T>::constIterator::operator!=(const constIterator& comp)co
 //====================================================================
 // iterator
 //====================================================================
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^(init‚Ì’l‚Å‰Šú‰»)
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(initã®å€¤ã§åˆæœŸåŒ–)
 template <class T>
 doublyLinkedList<T>::iterator::iterator(
 	Node* init, const doublyLinkedList* hostInit)
 	:constIterator(init, hostInit) {}
 
-//ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 template<class T>
 doublyLinkedList<T>::iterator::iterator() = default;
 
-//‘O’uƒfƒNƒŠƒƒ“ƒg—p(--it)
+//å‰ç½®ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(--it)
 template <class T>
 typename doublyLinkedList<T>::iterator& doublyLinkedList<T>::iterator::operator--() {
-	//‚à‚µend()‚È‚Ç‚©‚ç––”ö(ƒ_ƒ~[ƒm[ƒh)‚ğw’è‚µ‚ÄƒfƒNƒŠƒƒ“ƒg‚µ‚½ê‡A
+	//ã‚‚ã—end()ãªã©ã‹ã‚‰æœ«å°¾(ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰)ã‚’æŒ‡å®šã—ã¦ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã—ãŸå ´åˆã€
 	if (this->node == &this->host->dummy) {
-		//‚à‚µƒ_ƒ~[‚ÌprevNode‚ª©g‚ğw‚µ‚Ä‚¢‚½ê‡AƒŠƒXƒg‚Í‹ó‚È‚Ì‚ÅAassert”­¶
+		//ã‚‚ã—ãƒ€ãƒŸãƒ¼ã®prevNodeãŒè‡ªèº«ã‚’æŒ‡ã—ã¦ã„ãŸå ´åˆã€ãƒªã‚¹ãƒˆã¯ç©ºãªã®ã§ã€assertç™ºç”Ÿ
 		assert(this->node->prevNode != this->node);
 	}
-	//ÀÛ‚É’†g‚ª‚ ‚éƒm[ƒh‚¾‚Á‚½ê‡
+	//å®Ÿéš›ã«ä¸­èº«ãŒã‚ã‚‹ãƒãƒ¼ãƒ‰ã ã£ãŸå ´åˆ
 	else {
-		//prevNode‚ªƒ_ƒ~[‚¾‚Á‚½ê‡Aæ“ª‚ğ’Ê‚è‰z‚µ‚Ä‚¢‚é‚Ì‚ÅAassert”­¶
+		//prevNodeãŒãƒ€ãƒŸãƒ¼ã ã£ãŸå ´åˆã€å…ˆé ­ã‚’é€šã‚Šè¶Šã—ã¦ã„ã‚‹ã®ã§ã€assertç™ºç”Ÿ
 		assert(this->node->prevNode != &this->host->dummy);
 	}
 	this->node = this->node->prevNode;
 	return *this;
 }
 
-//Œã’uƒfƒNƒŠƒƒ“ƒg—p(it--)
+//å¾Œç½®ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(it--)
 template <class T>
 typename doublyLinkedList<T>::iterator doublyLinkedList<T>::iterator::operator--(int) {
 	iterator it = *this;
@@ -151,16 +151,16 @@ typename doublyLinkedList<T>::iterator doublyLinkedList<T>::iterator::operator--
 	return it;
 }
 
-///‘O’uƒCƒ“ƒNƒŠƒƒ“ƒg—p(++it)
+///å‰ç½®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(++it)
 template <class T>
 typename doublyLinkedList<T>::iterator& doublyLinkedList<T>::iterator::operator++() {
-	//nullptr‚Å‚Í‚È‚¢ê‡‚ÆAƒ_ƒ~[ƒm[ƒh‚Å‚Í‚È‚¢ê‡‚Ì‚İ’Ê‚·
+	//nullptrã§ã¯ãªã„å ´åˆã¨ã€ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰ã§ã¯ãªã„å ´åˆã®ã¿é€šã™
 	assert(this->node != nullptr && this->node != &this->host->dummy);
 	this->node = this->node->nextNode;
 	return *this;
 }
 
-///Œã’uƒCƒ“ƒNƒŠƒƒ“ƒg—p(it++)
+///å¾Œç½®ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆç”¨(it++)
 template <class T>
 typename doublyLinkedList<T>::iterator doublyLinkedList<T>::iterator::operator++(int) {
 	iterator it = *this;
@@ -168,21 +168,21 @@ typename doublyLinkedList<T>::iterator doublyLinkedList<T>::iterator::operator++
 	return it;
 }
 
-//ŠÔÚQÆ
+//é–“æ¥å‚ç…§
 template <class T>
 T& doublyLinkedList<T>::iterator::operator*() {
-	//nullptr‚Å‚Í‚È‚¢ê‡‚ÆAƒ_ƒ~[ƒm[ƒh‚Å‚Í‚È‚¢ê‡‚Ì‚İ’Ê‚·
+	//nullptrã§ã¯ãªã„å ´åˆã¨ã€ãƒ€ãƒŸãƒ¼ãƒãƒ¼ãƒ‰ã§ã¯ãªã„å ´åˆã®ã¿é€šã™
 	assert(this->node != nullptr && this->node != &this->host->dummy);
 	return this->node->data;
 }
 
-//“™’l”äŠr
+//ç­‰å€¤æ¯”è¼ƒ
 template <class T>
 bool doublyLinkedList<T>::iterator::operator==(const iterator& comp)const {
 	return this->host == comp.host && this->node == comp.node;
 }
 
-//”ñ“™’l”äŠr
+//éç­‰å€¤æ¯”è¼ƒ
 template <class T>
 bool doublyLinkedList<T>::iterator::operator!=(const iterator& comp)const {
 	return !(*this == comp);
@@ -190,33 +190,33 @@ bool doublyLinkedList<T>::iterator::operator!=(const iterator& comp)const {
 
 
 //====================================================================
-// ƒŠƒXƒg“à—v‘f‘€ìŠÖ”
+// ãƒªã‚¹ãƒˆå†…è¦ç´ æ“ä½œé–¢æ•°
 //====================================================================
-//ƒf[ƒ^”‚Ìæ“¾]
+//ãƒ‡ãƒ¼ã‚¿æ•°ã®å–å¾—]
 template <class T>
 size_t doublyLinkedList<T>::size() const {
 	return listSize;
 }
 
-//æ“ªƒCƒeƒŒ[ƒ^‚Ìæ“¾
+//å…ˆé ­ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã®å–å¾—
 template <class T>
 typename doublyLinkedList<T>::iterator doublyLinkedList<T>::begin() {
 	return iterator(dummy.nextNode, this);
 }
 
-//æ“ªƒRƒ“ƒXƒgƒCƒeƒŒ[ƒ^‚Ìæ“¾
+//å…ˆé ­ã‚³ãƒ³ã‚¹ãƒˆã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã®å–å¾—
 template <class T>
 typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::cbegin() const {
 	return constIterator(dummy.nextNode, this);
 }
 
-//––”öƒCƒeƒŒ[ƒ^‚Ìæ“¾
+//æœ«å°¾ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã®å–å¾—
 template <class T>
 typename doublyLinkedList<T>::iterator doublyLinkedList<T>::end() {
 	return iterator(&dummy, this);
 }
 
-//––”öƒRƒ“ƒXƒgƒCƒeƒŒ[ƒ^‚Ìæ“¾
+//æœ«å°¾ã‚³ãƒ³ã‚¹ãƒˆã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã®å–å¾—
 template <class T>
 typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::cend() const {
 	constIterator it = {};
@@ -225,11 +225,11 @@ typename doublyLinkedList<T>::constIterator doublyLinkedList<T>::cend() const {
 	return it;
 }
 
-//ƒŠƒXƒg“à‚Ì—v‘fæ“ª‚©‚ç‘SÁ‹
+//ãƒªã‚¹ãƒˆå†…ã®è¦ç´ å…ˆé ­ã‹ã‚‰å…¨æ¶ˆå»
 template <class T>
 void doublyLinkedList<T>::clear() {
 	Node* current = dummy.nextNode;
-	//current‚ªdummy‚É‚È‚é‚Ü‚Åƒ‹[ƒv‚µAdeleteNode‚Åƒm[ƒh‚ğíœ
+	//currentãŒdummyã«ãªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—ã—ã€deleteNodeã§ãƒãƒ¼ãƒ‰ã‚’å‰Šé™¤
 	while (current != &dummy) {
 		Node* next = current->nextNode;
 		deleteData(iterator(current, this));
@@ -237,17 +237,17 @@ void doublyLinkedList<T>::clear() {
 	}
 }
 
-//ˆÊ’unodePos‚Ì’¼‘O‚É‘}“ü(iterator)
+//ä½ç½®nodePosã®ç›´å‰ã«æŒ¿å…¥(iterator)
 template <class T>
 bool doublyLinkedList<T>::insertData(const iterator& nodePos, const T& data) {
-	//nodePos‚É‘Î‚µ‚Ästatic_cast‚ğs‚¢AconstIterator‚ÌinsertData‚ğg—p
+	//nodePosã«å¯¾ã—ã¦static_castã‚’è¡Œã„ã€constIteratorã®insertDataã‚’ä½¿ç”¨
 	return insertData(static_cast<const constIterator&>(nodePos), data);
 }
 
-//ˆÊ’unodePos‚Ì’¼‘O‚É‘}“ü(constIterator)
+//ä½ç½®nodePosã®ç›´å‰ã«æŒ¿å…¥(constIterator)
 template <class T>
 bool doublyLinkedList<T>::insertData(const constIterator& nodePos, const T& datas) {
-	//ƒCƒeƒŒ[ƒ^‚ÌŠ—LÒ‚ª©•ª‚Å‚È‚¢ê‡Afalse‚ğ•Ô‚·
+	//ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ã®æ‰€æœ‰è€…ãŒè‡ªåˆ†ã§ãªã„å ´åˆã€falseã‚’è¿”ã™
 	if (nodePos.host != this) {
 		return false;
 	}
@@ -256,43 +256,43 @@ bool doublyLinkedList<T>::insertData(const constIterator& nodePos, const T& data
 		return false;
 	}
 
-	//ƒm[ƒh‚ğ’Ç‰Á
+	//ãƒãƒ¼ãƒ‰ã‚’è¿½åŠ 
 	Node* next = {};
 
-	//nodePos‚ª‹ó‚Å‚È‚¢ê‡
+	//nodePosãŒç©ºã§ãªã„å ´åˆ
 	if (nodePos.node != nullptr) {
-		//‘}“üæ‚ğ‘ã“ü
+		//æŒ¿å…¥å…ˆã‚’ä»£å…¥
 		next = nodePos.node;
 	}
-	//‚»‚êˆÈŠO‚Ìê‡‚Íƒ_ƒ~[‚ğ‘ã“ü
+	//ãã‚Œä»¥å¤–ã®å ´åˆã¯ãƒ€ãƒŸãƒ¼ã‚’ä»£å…¥
 	else {
 		next = &dummy;
 	}
 
-	//V‹Kƒm[ƒh‚ğ¶¬‚µAÚ‘±‚ğÄ•Ò¬
+	//æ–°è¦ãƒãƒ¼ãƒ‰ã‚’ç”Ÿæˆã—ã€æ¥ç¶šã‚’å†ç·¨æˆ
 	Node* current = new Node();
 	current->prevNode = next->prevNode;
 	current->nextNode = next;
 	next->prevNode->nextNode = current;
 	next->prevNode = current;
 
-	//ƒf[ƒ^‚ğ‘ã“ü‚µAƒ_ƒ~[‚Å‚Í‚È‚¢‚Æ”»•Ê‚·‚é
+	//ãƒ‡ãƒ¼ã‚¿ã‚’ä»£å…¥ã—ã€ãƒ€ãƒŸãƒ¼ã§ã¯ãªã„ã¨åˆ¤åˆ¥ã™ã‚‹
 	current->data = datas;
 
-	//ƒŠƒXƒgƒTƒCƒY‚ğŠÇ—‚·‚é•Ï”‚ğ+1
+	//ãƒªã‚¹ãƒˆã‚µã‚¤ã‚ºã‚’ç®¡ç†ã™ã‚‹å¤‰æ•°ã‚’+1
 	++listSize;
 
 	return true;
 }
 
-//ˆÊ’unodePos‚É‚ ‚é—v‘f‚ğíœ(iterator)
+//ä½ç½®nodePosã«ã‚ã‚‹è¦ç´ ã‚’å‰Šé™¤(iterator)
 template <class T>
 bool doublyLinkedList<T>::deleteData(const iterator& nodePos) {
-	//nodePos‚É‘Î‚µ‚Ästatic_cast‚ğs‚¢AconstIterator‚ÌdeleteData‚ğg—p
+	//nodePosã«å¯¾ã—ã¦static_castã‚’è¡Œã„ã€constIteratorã®deleteDataã‚’ä½¿ç”¨
 	return deleteData(static_cast<const constIterator&> (nodePos));
 }
 
-//ˆÊ’unodePos‚É‚ ‚é—v‘f‚ğíœ(constIterator)
+//ä½ç½®nodePosã«ã‚ã‚‹è¦ç´ ã‚’å‰Šé™¤(constIterator)
 template <class T>
 bool doublyLinkedList<T>::deleteData(const constIterator& nodePos) {
 	if (listSize == 0)               return false;
@@ -303,34 +303,34 @@ bool doublyLinkedList<T>::deleteData(const constIterator& nodePos) {
 
 	Node* current = nodePos.node;
 
-	//ƒm[ƒh‚Ì‘OŒã‚Ìƒ|ƒCƒ“ƒ^‚ğÄ•Ò¬
+	//ãƒãƒ¼ãƒ‰ã®å‰å¾Œã®ãƒã‚¤ãƒ³ã‚¿ã‚’å†ç·¨æˆ
 	current->nextNode->prevNode = current->prevNode;
 	current->prevNode->nextNode = current->nextNode;
 
-	//current‚ğíœ‚µAƒŠƒXƒgƒTƒCƒY‚àŒ¸‚ç‚·
+	//currentã‚’å‰Šé™¤ã—ã€ãƒªã‚¹ãƒˆã‚µã‚¤ã‚ºã‚‚æ¸›ã‚‰ã™
 	delete current;
 	--listSize;
 
 	return true;
 }
 
-//ƒNƒCƒbƒNƒ\[ƒg
+//ã‚¯ã‚¤ãƒƒã‚¯ã‚½ãƒ¼ãƒˆ
 template <class T>
 void doublyLinkedList<T>::sortList(const int sortKey,  const bool isAscend) {
-	//‚à‚µƒŠƒXƒgƒTƒCƒY‚ª1‚à‚µ‚­‚Í‚»‚êˆÈ‰º‚¾‚Á‚½ê‡A’†’f
-	if (this->size() <= 1) return;
+	//ã‚‚ã—ãƒªã‚¹ãƒˆã‚µã‚¤ã‚ºãŒ1ã‚‚ã—ãã¯ãã‚Œä»¥ä¸‹ã ã£ãŸå ´åˆã€ä¸­æ–­
+	//if (this->size() <= 1) return;
 
-	//•ªŠ„”»’fŠî€‚ğæ“ª‚Éw’è
-	Node* element = dummy->nextNode;
+	//åˆ†å‰²åˆ¤æ–­åŸºæº–ã‚’å…ˆé ­ã«æŒ‡å®š
+	//Node* element = dummy->nextNode;
 
-	Node* indexI = element->nextNode;
-	Node* indexJ = dummy->prevNode;
+	//Node* indexI = element->nextNode;
+	//Node* indexJ = dummy->prevNode;
 
-	//‰‰ñ‚Ìƒ\[ƒg‚ğs‚¤
-	for (Node* current = element->nextNode; current != &dummy; current = current->nextNode) {
+	//åˆå›ã®ã‚½ãƒ¼ãƒˆã‚’è¡Œã†
+	//for (Node* current = element->nextNode; current != &dummy; current = current->nextNode) {
 		
-		if (current > element) {
+		//if (current > element) {
 
-		}
-	}
+		//}
+	//}
 }
