@@ -315,8 +315,8 @@ bool doublyLinkedList<T>::deleteData(const constIterator& nodePos) {
 }
 
 //クイックソート
-template <class T>
-void doublyLinkedList<T>::sortList(const int sortKey,  const bool isAscend) {
+//template <class T>
+//void doublyLinkedList<T>::sortList(const int sortKey,  const bool isAscend) {
 	//もしリストサイズが1もしくはそれ以下だった場合、中断
 	//if (this->size() <= 1) return;
 
