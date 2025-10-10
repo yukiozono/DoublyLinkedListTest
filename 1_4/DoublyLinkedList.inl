@@ -321,7 +321,16 @@ void doublyLinkedList<T>::sortList(const int sortKey,  const bool isAscend) {
 	if (this->size() <= 1) return;
 
 	//分割判断基準を先頭に指定
-	const T element = *this->begin();
+	Node* element = dummy->nextNode;
 
+	Node* indexI = element->nextNode;
+	Node* indexJ = dummy->prevNode;
 
+	//初回のソートを行う
+	for (Node* current = element->nextNode; current != &dummy; current = current->nextNode) {
+		
+		if (current > element) {
+
+		}
+	}
 }

@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="ScoreData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
