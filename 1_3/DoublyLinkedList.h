@@ -4,7 +4,7 @@
 
 /**
  * @class  doublyLinkedList
- * @tparam リストに格納する要素の型
+ * @tparam リストに格納する要素型
  * @brief  指定されたデータを取り込み、出力可能なリスト
  */
 template <class T>
