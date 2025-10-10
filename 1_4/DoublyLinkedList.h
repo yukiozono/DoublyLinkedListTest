@@ -19,12 +19,25 @@ private:
 
 	/**
      * @brief  引数のノードが存在するかを探索する
-     * @tparam  node 対象のポインタ
+     * @param node 対象のポインタ
 	 * @return 存在する場合はtrue、無い場合はfalseを返す
      */
 	bool containsNode(const Node* node) const;
 
-	
+	//==================================================================
+	//
+	// クイックソート用関数
+	// 
+	//==================================================================
+	/**
+	 * @brief  aとbのノートを交換し、繋ぎなおす
+	 * @param a  交換するノード
+	 * @param b  交換するノード
+	 */
+	static void swapData(Node* a, Node* b);
+
+
+
 
 public:
 	/**
@@ -88,21 +101,21 @@ public:
 
 		/**
 		 * @brief   コピー代入演算子(iteratorの位置ポインタを上書き)(代入を行う[operator=]())
-		 * @tparam   source 代入元
+		 * @param   source 代入元
 		 * @return  *this
 		 */
 		constIterator& operator=(const constIterator& source);
 		
 		/**
 		 * @brief   等値比較(==であればtrueを返す)(値と所有者が同一か比較する[operator==]())
-		 * @tparam   comp 比較相手
+		 * @param   comp 比較相手
 		 * @return  等しい場合、true
 		 */
 		bool operator==(const constIterator& comp) const;
 
 		/**
 		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
-		 * @tparam   comp 比較相手
+		 * @param   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
 		bool operator!=(const constIterator& comp) const;
@@ -128,7 +141,7 @@ public:
 
 		/**
 		 * @brief  後置デクリメント用(it--)(リストの先頭に向かって一つ進める[operator--]())
-		 * @tparam  dummy(int)
+		 * @param  dummy(int)
 		 * @return 前に戻る以前のiterator
 		 */
 		iterator  operator--(int);
@@ -141,7 +154,7 @@ public:
 
 		/**
 		 * @brief  後置インクリメント用(it++)(リストの末尾に向かって一つ進める[operator++]())
-		 * @tparam  dummy(int)
+		 * @param  dummy(int)
 		 * @return 次に進む以前のiterator
 		 */
 		iterator  operator++(int);
@@ -154,14 +167,14 @@ public:
 
 		/**
 		 * @brief   等値比較(==であればtrueを返す)(同一か比較する[operator==]())
-		 * @tparam   comp 比較相手
+		 * @param   comp 比較相手
 		 * @return  等しい場合、true
 		 */
 		bool operator==(const iterator& comp) const;
 
 		/**
 		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
-		 * @tparam   comp 比較相手
+		 * @param   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
 		bool operator!=(const iterator& comp) const;
@@ -217,42 +230,52 @@ public:
 
 	/**
 	 * @brief  位置nodePosの直前に挿入(iterator)
-	 * @tparam  nodePos ノード位置
-	 * @tparam  data    入力データ
+	 * @param  nodePos ノード位置
+	 * @param  data    入力データ
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const iterator& nodePos, const T& data);
 
 	/**
 	 * @brief  位置nodePosの直前に挿入(constIterator)
-	 * @tparam  nodePos ノード位置
-	 * @tparam   data   入力データ
+	 * @param  nodePos ノード位置
+	 * @param   data   入力データ
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const constIterator& nodePos, const T& datas);
 
 	/**
 	 * @brief  位置nodePosにある要素を削除(iterator)
-	 * @tparam  nodePos ノード位置
+	 * @param  nodePos ノード位置
 	 * @return 成功であればtrue、そして空、host不一致、nodePos==endもしくは不正であればfalseを返す
 	 */
 	bool deleteData(const iterator& nodePos);
 
 	/**
 	 * @brief  位置nodePosにある要素を削除(constIterator)
-	 * @tparam  nodePos ノード位置
+	 * @param  nodePos ノード位置
 	 * @return 成功であればtrue、失敗の場合はfalseを返す
 	 */
 	bool deleteData(const constIterator& nodePos);
 
+
+	//==================================================================
+	//
+	// クイックソート用関数
+	// 
+	//==================================================================
+
 	/**
 	 * @brief  リストをクイックソートでソートする
-	 * @tparam  element  ソートキー
-	 * @tparam  isAscend 昇順であるかどうか
+	 * @param  sortKey  ソートキー（任意のデータ型)
+	 * @param  isAscend 昇順であるかどうか
 	 * @return 成功であればtrue、失敗の場合はfalseを返す
-	 * @note   参考URL:(https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/similar_programming/quick_sort/)(https://algs4.cs.princeton.edu/23quicksort/)
+	 * @note   参考URL:
+	 *         (https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/similar_programming/quick_sort/)
+	 *         (https://algs4.cs.princeton.edu/23quicksort/)
 	 */
-	void sortList(const int sortKey, const bool isAscend);
+	template <class sortKey>
+	void sortList(sortKey (*key)(const T&), bool isAscend);
 };
 
 //.inlをインクルード
