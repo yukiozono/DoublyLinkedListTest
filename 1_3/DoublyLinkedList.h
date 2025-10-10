@@ -4,7 +4,7 @@
 
 /**
  * @class  doublyLinkedList
- * @tparam リストに格納する要素型
+ * @tparam T リストに格納する要素型
  * @brief  指定されたデータを取り込み、出力可能なリスト
  */
 template <class T>
@@ -13,7 +13,7 @@ private:
 	struct Node {
 		Node* prevNode = nullptr;    //一つ前のノードのポインタ
 		Node* nextNode = nullptr;    //一つ後のノードのポインタ
-		T data = {};
+		T data = {};                 //リストに格納するデータ
 	};
 	size_t listSize = 0;   //現在のリストのサイズ
 	Node  dummy = {};       //ダミーノード
@@ -46,12 +46,16 @@ public:
 		//生成元
 		const doublyLinkedList* host = nullptr;
 
-		//コンストラクタ(initの値で初期化)
+		/**
+		 * @brief  コンストラクタ(initの値で初期化し、所有者を代入)
+		 * @param  init     初期値
+		 * @param  hostInit 所有者
+		 */
 		explicit constIterator(Node* init, const doublyLinkedList* hostInit);
 
 	public:
 	    /**
-	     * @brief  デフォルトコンストラクタ(iterator()呼出時、nodeをnullptrに)
+	     * @brief  デフォルトコンストラクタ(constIterator()呼出時、nodeをnullptrに)
 	     */
 		constIterator();
 
@@ -100,7 +104,7 @@ public:
 		bool operator==(const constIterator& comp) const;
 
 		/**
-		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
+		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]())
 		 * @param   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
@@ -111,11 +115,17 @@ public:
 		//doublyLinkedListからアクセスするための宣言
 		friend class doublyLinkedList;
 
-		//コンストラクタ(initの値で初期化)
+		/**
+		 * @brief  コンストラクタ(initの値で初期化し、所有者を代入)
+		 * @param  init     初期値
+		 * @param  hostInit 所有者
+		 */
 		explicit iterator(Node* init, const doublyLinkedList* hostInit);
 
 	public:
-		//初期値はdefaultのnullptrにお任せ
+		/**
+	     * @brief コンストラクタ
+	     */
 		iterator();
 
 		//先頭でも末尾でもないイテレータ直接指定用
@@ -159,7 +169,7 @@ public:
 		bool operator==(const iterator& comp) const;
 
 		/**
-		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]()
+		 * @brief   非等値比較(!=であればtrueを返す)(異なるかか比較する[operator!=]())
 		 * @param   comp 比較相手
 		 * @return  等しくない場合、true
 		 */
@@ -225,7 +235,7 @@ public:
 	/**
 	 * @brief  位置nodePosの直前に挿入(constIterator)
 	 * @param  nodePos ノード位置
-	 * @param   data   入力データ
+	 * @param   datas   入力データ
 	 * @return 成功であればtrue、不正イテレータ等の場合はfalseを返す
 	 */
 	bool insertData(const constIterator& nodePos, const T& datas);
@@ -233,7 +243,7 @@ public:
 	/**
 	 * @brief  位置nodePosにある要素を削除(iterator)
 	 * @param  nodePos ノード位置
-	 * @return 成功であればtrue、そして空、host不一致、nodePos==endもしくは不正であればfalseを返す
+	 * @return 成功であればtrue、失敗(空、host不一致、nodePos==endもしくは不正)であればfalseを返す
 	 */
 	bool deleteData(const iterator& nodePos);
 
