@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "../1_3/ScoreData.h"
 #include "../1_3/DoublyLinkedList.h"
 
 /**
@@ -122,12 +123,12 @@ TEST(doublyLinkedListTest, ID0_9_ifListEmptyInsert_returnTRUE) {
     //正しい位置に2,Bがあるかチェック
     doublyLinkedList<scoreData>::constIterator it = list.cbegin();
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 
     //一つ前進し、内容をチェック
     ++it;
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
 
 }
@@ -151,7 +152,7 @@ TEST(doublyLinkedListTest, ID0_10_ifListHasSeveralNodesInsertHeadIterator_return
     doublyLinkedList<scoreData>::constIterator it = list.begin();
     ++it;
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 }
 
 /**
@@ -176,7 +177,7 @@ TEST(doublyLinkedListTest, ID0_11_ifListHasSeveralNodesInsertTailIterator_return
         last = it;
     }
     EXPECT_EQ(3, (*last).score);
-    EXPECT_EQ(std::string("C"), (*last).userName);
+    EXPECT_EQ(std::string("C"), (*last).name);
 }
 
 /**
@@ -389,7 +390,7 @@ TEST(doublyLinkedListTest, ID0_24_ifHaveOneNodeInList_returnBeginIterator) {
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::iterator it = list.begin();
     EXPECT_EQ(1, (*it).score);
-    EXPECT_EQ(std::string("A"), (*it).userName);
+    EXPECT_EQ(std::string("A"), (*it).name);
 }
 
 /**
@@ -405,7 +406,7 @@ TEST(doublyLinkedListTest, ID0_25_ifHaveMoreThanTwoNodeInList_returnBeginIterato
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::iterator it = list.begin();
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 }
 
 /**
@@ -419,14 +420,14 @@ TEST(doublyLinkedListTest, ID0_26_afterInserted_returnBeginIterator) {
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::iterator it = list.begin();
     EXPECT_EQ(1, (*it).score);
-    EXPECT_EQ(std::string("A"), (*it).userName);
+    EXPECT_EQ(std::string("A"), (*it).name);
 
     //先頭にに文字列を挿入
     list.insertData(list.cbegin(), scoreData{ 3, "C" });
     //先頭イテレータを確認
     it = list.begin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     it = list.begin();
     ++it;
@@ -436,7 +437,7 @@ TEST(doublyLinkedListTest, ID0_26_afterInserted_returnBeginIterator) {
     //再度先頭イテレータを確認
     it = list.begin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
     
 }
 
@@ -460,7 +461,7 @@ TEST(doublyLinkedListTest, ID0_27_afterDeleted_returnBeginIterator) {
     //先頭に戻し、要素をチェック
     it = list.begin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     //末尾要素を削除
     ++it;
@@ -469,7 +470,7 @@ TEST(doublyLinkedListTest, ID0_27_afterDeleted_returnBeginIterator) {
     //先頭に戻し、要素をチェック
     it = list.begin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     //先頭要素を追加し、削除
     list.insertData(list.begin(), scoreData{ 1,"A" });
@@ -481,7 +482,7 @@ TEST(doublyLinkedListTest, ID0_27_afterDeleted_returnBeginIterator) {
     //先頭に戻し、要素をチェック
     it = list.begin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 }
 
 /**
@@ -520,7 +521,7 @@ TEST(doublyLinkedListTest, ID0_30_ifHaveOneNodeInList_returnBeginConstIterator) 
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::constIterator it = list.cbegin();
     EXPECT_EQ(1, (*it).score);
-    EXPECT_EQ(std::string("A"), (*it).userName);
+    EXPECT_EQ(std::string("A"), (*it).name);
 }
 
 /**
@@ -536,7 +537,7 @@ TEST(doublyLinkedListTest, ID0_31_ifHaveMoreThanTwoNodeInList_returnBeginConstIt
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::constIterator it = list.cbegin();
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 }
 
 /**
@@ -550,14 +551,14 @@ TEST(doublyLinkedListTest, ID0_32_afterInserted_returnBeginConstIterator) {
     //先頭イテレータを確認
     doublyLinkedList<scoreData>::constIterator it = list.cbegin();
     EXPECT_EQ(1, (*it).score);
-    EXPECT_EQ(std::string("A"), (*it).userName);
+    EXPECT_EQ(std::string("A"), (*it).name);
 
     //先頭にに文字列を挿入
     list.insertData(list.cbegin(), scoreData{ 3, "C" });
     //先頭イテレータを確認
     it = list.cbegin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     it = list.cbegin();
     ++it;
@@ -567,7 +568,7 @@ TEST(doublyLinkedListTest, ID0_32_afterInserted_returnBeginConstIterator) {
     //再度先頭イテレータを確認
     it = list.cbegin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
 }
 
@@ -591,7 +592,7 @@ TEST(doublyLinkedListTest, ID0_23_afterDeleted_returnBeginConstIterator) {
     //先頭に戻し、要素をチェック
     it = list.cbegin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     //末尾要素を削除
     ++it;
@@ -600,7 +601,7 @@ TEST(doublyLinkedListTest, ID0_23_afterDeleted_returnBeginConstIterator) {
     //先頭に戻し、要素をチェック
     it = list.cbegin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     //先頭要素を追加し、削除
     list.insertData(list.cbegin(), scoreData{ 1,"A" });
@@ -612,7 +613,7 @@ TEST(doublyLinkedListTest, ID0_23_afterDeleted_returnBeginConstIterator) {
     //先頭に戻し、要素をチェック
     it = list.cbegin();
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 }
 
 /**
@@ -657,7 +658,7 @@ TEST(doublyLinkedListTest, ID0_36_ifHaveOneNodeInList_returnEndIterator) {
     doublyLinkedList<scoreData>::iterator it = list.begin();
     ++it;
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 }
 
 /**
@@ -681,7 +682,7 @@ TEST(doublyLinkedListTest, ID0_37_ifHaveMoreThanTwoNodeInList_returnEndIterator)
     ++it;
     ++it;
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 }
 
 /**
@@ -808,7 +809,7 @@ TEST(doublyLinkedListTest, ID0_42_ifHaveOneNodeInList_returnEndConstIterator) {
     doublyLinkedList<scoreData>::constIterator it = list.cbegin();
     ++it;
     EXPECT_EQ(2, (*it).score);
-    EXPECT_EQ(std::string("B"), (*it).userName);
+    EXPECT_EQ(std::string("B"), (*it).name);
 
     //末尾を確認
     EXPECT_EQ(endIt, list.cend());
@@ -835,7 +836,7 @@ TEST(doublyLinkedListTest, ID0_43_ifHaveMoreThanTwoNodeInList_returnEndConstIter
     ++it;
     ++it;
     EXPECT_EQ(3, (*it).score);
-    EXPECT_EQ(std::string("C"), (*it).userName);
+    EXPECT_EQ(std::string("C"), (*it).name);
 
     //末尾を確認
     EXPECT_EQ(endIt, list.cend());

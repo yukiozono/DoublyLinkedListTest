@@ -1,4 +1,5 @@
 #include "DoublyLinkedList.h"
+#include "ScoreData.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -36,7 +37,7 @@ int main(void) {
 		catch (...) {
 			continue;
 		}
-		data.userName = line.substr(tab + 1);
+		data.name = line.substr(tab + 1);
 
 		// 末尾にノードを追加
 		list.insertData(list.cend(), data);
@@ -48,7 +49,7 @@ int main(void) {
 	
 	//リストの内容を出力
 	for (auto& it : list) {
-		std::cout << it.score << '\t' << it.userName << std::endl;
+		std::cout << it.score << '\t' << it.name << std::endl;
 	}
 
 	return 0;
