@@ -34,7 +34,7 @@ private:
 	 * @param a  交換するノード
 	 * @param b  交換するノード
 	 */
-	static void swapData(Node* a, Node* b);
+	//static void swapData(Node* a, Node* b);
 
 
 
@@ -274,8 +274,8 @@ public:
 	 *         (https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/similar_programming/quick_sort/)
 	 *         (https://algs4.cs.princeton.edu/23quicksort/)
 	 */
-	template <class sortKey>
-	void sortList(sortKey (*key)(const T&), bool isAscend);
+	//template <class sortKey>
+	//void sortList(sortKey (*key)(const T&), bool isAscend);
 };
 
 //.inlをインクルード
